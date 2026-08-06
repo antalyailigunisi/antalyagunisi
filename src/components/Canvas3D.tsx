@@ -12,11 +12,12 @@ function RealZirveGunisiModel() {
   const phone = '0506 252 16 81';
 
   // Fotoğraftaki Gerçek Çatı Eğim Açısı ve Tüp Boyu
-  const tubeAngle = Math.PI / 1.4; // ~66 derece dikey/eğimli duruş
+  const tubeAngle = Math.PI / 2.7; // ~66 derece dikey/eğimli duruş
   const tubeLength = 2.1;          // Tüp uzunluğu
 
   return (
-    <group position={[0, -0.35, 0]}>
+    // 🌟 MODELİ 180 DERECE (Math.PI) ÇEVİRDİK - ARTIK DOĞRU YÜZÜ BİREBİR İLK AÇILIŞTA ÖNE BAKACAK!
+    <group position={[0, -0.35, 0]} rotation={[0, Math.PI, 0]}>
       {/* 1. ÜST BEYAZ SOĞUK SU DEPOSU */}
       <group position={[0, 1.65, -0.2]}>
         <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
@@ -85,7 +86,7 @@ function RealZirveGunisiModel() {
         </Text>
       </group>
 
-      {/* 3. VAKUM TÜPLER (FOTOĞRAFTAKİ GERÇEK DİK EĞİM) */}
+      {/* 3. VAKUM TÜPLER */}
       <group position={[0, 0.8, 0.1]} rotation={[tubeAngle, 0, 0]}>
         {Array.from({ length: TUBE_COUNT }, (_, i) => {
           const x = TUBE_START + i * TUBE_SPACING;
@@ -153,7 +154,7 @@ export default function Canvas3D() {
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-4 py-1.5 rounded-full text-xs text-gray-300 pointer-events-none flex items-center gap-2 border border-solar-500/30">
         <span className="w-2.5 h-2.5 rounded-full bg-solar-500 animate-ping"></span>
-        Reklamlar
+        3D Modeli Çevirerek İnceleyin
       </div>
     </div>
   );
