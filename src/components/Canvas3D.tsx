@@ -12,12 +12,11 @@ function RealZirveGunisiModel() {
   const phone = '0506 252 16 81';
 
   // Fotoğraftaki Gerçek Çatı Eğim Açısı ve Tüp Boyu
-  const tubeAngle = Math.PI / 2.7; // ~66 derece dikey/eğimli duruş
+  const tubeAngle = Math.PI / 3.7; // ~66 derece dikey/eğimli duruş
   const tubeLength = 2.1;          // Tüp uzunluğu
 
   return (
-    // 🌟 MODELİ 180 DERECE (Math.PI) ÇEVİRDİK - ARTIK DOĞRU YÜZÜ BİREBİR İLK AÇILIŞTA ÖNE BAKACAK!
-    <group position={[0, -0.35, 0]} rotation={[0, Math.PI, 0]}>
+    <group position={[0, -0.35, 0]}>
       {/* 1. ÜST BEYAZ SOĞUK SU DEPOSU */}
       <group position={[0, 1.65, -0.2]}>
         <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
@@ -86,7 +85,7 @@ function RealZirveGunisiModel() {
         </Text>
       </group>
 
-      {/* 3. VAKUM TÜPLER */}
+      {/* 3. VAKUM TÜPLER (FOTOĞRAFTAKİ GERÇEK DİK EĞİM) */}
       <group position={[0, 0.8, 0.1]} rotation={[tubeAngle, 0, 0]}>
         {Array.from({ length: TUBE_COUNT }, (_, i) => {
           const x = TUBE_START + i * TUBE_SPACING;
