@@ -1,131 +1,150 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, ContactShadows, Text, Instances, Instance } from '@react-three/drei';
+import { OrbitControls, Float, ContactShadows, Text } from '@react-three/drei';
 import { Suspense } from 'react';
 
-const TUBE_COUNT = 12;
-const TUBE_SPACING = 0.16;
-const TUBE_START = -0.88;
+const TUBE_COUNT = 16;
+const TUBE_SPACING = 0.13;
+const TUBE_START = -0.98;
 
-function DualTankCustomModel() {
+function RealZirveGunisiModel() {
   const phone = '0506 252 16 81';
 
   return (
-    <group position={[0, -0.2, 0]} rotation={[0, -Math.PI / 5, 0]}>
-      {/* 1. ÜST DEPO */}
-      <group position={[0, 1.35, -0.2]}>
+    <group position={[0, -0.3, 0]} rotation={[0.05, 0, 0]}>
+      {/* 1. ÜST BEYAZ SOĞUK SU DEPOSU */}
+      <group position={[0, 1.55, -0.2]}>
+        {/* Beyaz Gövde */}
         <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-          <cylinderGeometry args={[0.38, 0.38, 2.2, 64]} />
-          <meshStandardMaterial color="#F3F4F6" metalness={0.96} roughness={0.08} envMapIntensity={1.8} />
+          <cylinderGeometry args={[0.32, 0.32, 2.1, 64]} />
+          <meshStandardMaterial color="#FFFFFF" roughness={0.15} metalness={0.1} />
+        </mesh>
+        
+        {/* Sol & Sağ Beyaz Kapaklar */}
+        <mesh position={[-1.06, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <sphereGeometry args={[0.32, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial color="#F3F4F6" roughness={0.2} />
+        </mesh>
+        <mesh position={[1.06, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
+          <sphereGeometry args={[0.32, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial color="#F3F4F6" roughness={0.2} />
         </mesh>
 
+        {/* Metal Montaj Kelepçeleri (Straps) */}
+        <mesh position={[-0.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <torusGeometry args={[0.33, 0.02, 16, 32]} />
+          <meshStandardMaterial color="#9CA3AF" metalness={0.9} roughness={0.1} />
+        </mesh>
+        <mesh position={[0.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <torusGeometry args={[0.33, 0.02, 16, 32]} />
+          <meshStandardMaterial color="#9CA3AF" metalness={0.9} roughness={0.1} />
+        </mesh>
+      </group>
+
+      {/* 2. ANA MANİFOLD DEPO (TURUNCU KAPAKLI & ZİRVE AMBLEMLİ) */}
+      <group position={[0, 0.9, 0]}>
+        {/* Ana Beyaz Silindir */}
+        <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
+          <cylinderGeometry args={[0.36, 0.36, 2.2, 64]} />
+          <meshStandardMaterial color="#FFFFFF" roughness={0.15} metalness={0.05} />
+        </mesh>
+
+        {/* SOL CANLI TURUNCU KAPAK */}
         <mesh position={[-1.11, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <sphereGeometry args={[0.38, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
-          <meshStandardMaterial color="#D1D5DB" metalness={0.95} roughness={0.1} />
-        </mesh>
-        <mesh position={[1.11, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
-          <sphereGeometry args={[0.38, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
-          <meshStandardMaterial color="#D1D5DB" metalness={0.95} roughness={0.1} />
+          <cylinderGeometry args={[0.37, 0.37, 0.08, 32]} />
+          <meshStandardMaterial color="#EA580C" roughness={0.3} />
         </mesh>
 
-        {/* 🌟 3D Yazılar (Dahili Hızlı Font) */}
+        {/* SAĞ CANLI TURUNCU KAPAK */}
+        <mesh position={[1.11, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.37, 0.37, 0.08, 32]} />
+          <meshStandardMaterial color="#EA580C" roughness={0.3} />
+        </mesh>
+
+        {/* 🌟 BEYAZ TABELA / AMBLEM ALANI */}
+        <mesh position={[0, 0, 0.361]}>
+          <planeGeometry args={[1.5, 0.38]} />
+          <meshStandardMaterial color="#FFFFFF" roughness={0.1} />
+        </mesh>
+
+        {/* Logo Sembolü (Kırmızı Küre) */}
+        <mesh position={[-0.55, 0.03, 0.37]}>
+          <sphereGeometry args={[0.07, 16, 16]} />
+          <meshStandardMaterial color="#DC2626" roughness={0.3} />
+        </mesh>
+
+        {/* ZİRVE Yazısı */}
         <Text
-          position={[0, 0.08, 0.39]}
-          fontSize={0.095}
-          color="#000000"
+          position={[-0.22, 0.04, 0.37]}
+          fontSize={0.13}
+          color="#111827"
           anchorX="center"
           anchorY="middle"
         >
-          ANTALYA GUNISI ZIRVE
+          ZİRVE
         </Text>
 
+        {/* Güneş Enerji Sistemleri Alt Yazısı */}
         <Text
-          position={[0, -0.08, 0.39]}
-          fontSize={0.085}
-          color="#D97706"
+          position={[-0.22, -0.08, 0.37]}
+          fontSize={0.04}
+          color="#166534"
+          anchorX="center"
+          anchorY="middle"
+        >
+          Güneş Enerji Sistemleri
+        </Text>
+
+        {/* Telefon Numarası */}
+        <Text
+          position={[0.35, 0, 0.37]}
+          fontSize={0.11}
+          color="#000000"
           anchorX="center"
           anchorY="middle"
         >
           {phone}
         </Text>
-
-        <mesh position={[-0.7, 0.39, 0]}>
-          <cylinderGeometry args={[0.035, 0.035, 0.1, 16]} />
-          <meshStandardMaterial color="#EF4444" roughness={0.2} />
-        </mesh>
-        <mesh position={[0.7, 0.39, 0]}>
-          <cylinderGeometry args={[0.035, 0.035, 0.1, 16]} />
-          <meshStandardMaterial color="#3B82F6" roughness={0.2} />
-        </mesh>
       </group>
 
-      {/* 2. ALT DEPO */}
-      <group position={[0, 0.72, -0.35]}>
-        <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-          <cylinderGeometry args={[0.26, 0.26, 2.0, 64]} />
-          <meshStandardMaterial color="#E5E7EB" metalness={0.92} roughness={0.12} />
-        </mesh>
-        <mesh position={[-1.01, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <sphereGeometry args={[0.26, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
-          <meshStandardMaterial color="#9CA3AF" metalness={0.9} roughness={0.15} />
-        </mesh>
-        <mesh position={[1.01, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
-          <sphereGeometry args={[0.26, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
-          <meshStandardMaterial color="#9CA3AF" metalness={0.9} roughness={0.15} />
-        </mesh>
+      {/* 3. SIMSIYAH PARLAK VAKUM TÜPLER (16 ADET) */}
+      <group position={[0, -0.05, 0.38]} rotation={[Math.PI / 3.2, 0, 0]}>
+        {Array.from({ length: TUBE_COUNT }, (_, i) => {
+          const x = TUBE_START + i * TUBE_SPACING;
+          return (
+            <group key={i} position={[x, 0, 0]}>
+              {/* Siyah Parlak Cam Tüp */}
+              <mesh castShadow>
+                <cylinderGeometry args={[0.042, 0.042, 1.85, 24]} />
+                <meshStandardMaterial
+                  color="#050811"
+                  metalness={0.9}
+                  roughness={0.05}
+                  envMapIntensity={2.0}
+                />
+              </mesh>
+            </group>
+          );
+        })}
       </group>
 
-      {/* 3. ÇELİK TAŞIYICI İSKELET */}
+      {/* 4. ALT TURUNCU TAŞIYICI ÇERÇEVE RAYI */}
+      <mesh position={[0, -0.82, 0.88]}>
+        <boxGeometry args={[2.3, 0.12, 0.08]} />
+        <meshStandardMaterial color="#EA580C" roughness={0.3} metalness={0.2} />
+      </mesh>
+
+      {/* 5. ARKA SİYAH İSKELET AYAKLARI */}
       <group>
-        <mesh position={[-0.95, 0.45, -0.3]}>
-          <boxGeometry args={[0.06, 1.9, 0.06]} />
-          <meshStandardMaterial color="#1F2937" metalness={0.8} roughness={0.3} />
+        <mesh position={[-0.98, 0.35, -0.2]}>
+          <boxGeometry args={[0.05, 2.1, 0.05]} />
+          <meshStandardMaterial color="#111827" roughness={0.5} />
         </mesh>
-        <mesh position={[0.95, 0.45, -0.3]}>
-          <boxGeometry args={[0.06, 1.9, 0.06]} />
-          <meshStandardMaterial color="#1F2937" metalness={0.8} roughness={0.3} />
+        <mesh position={[0.98, 0.35, -0.2]}>
+          <boxGeometry args={[0.05, 2.1, 0.05]} />
+          <meshStandardMaterial color="#111827" roughness={0.5} />
         </mesh>
-        <mesh position={[-0.95, 0.1, 0.35]} rotation={[Math.PI / 5, 0, 0]}>
-          <boxGeometry args={[0.06, 2.2, 0.06]} />
-          <meshStandardMaterial color="#374151" metalness={0.8} roughness={0.3} />
-        </mesh>
-        <mesh position={[0.95, 0.1, 0.35]} rotation={[Math.PI / 5, 0, 0]}>
-          <boxGeometry args={[0.06, 2.2, 0.06]} />
-          <meshStandardMaterial color="#374151" metalness={0.8} roughness={0.3} />
-        </mesh>
-      </group>
-
-      {/* 4. VAKUM TÜPLER (InstancedMesh) */}
-      <group position={[0, -0.05, 0.32]} rotation={[Math.PI / 4, 0, 0]}>
-        <mesh position={[0, 0, -0.04]}>
-          <boxGeometry args={[2.15, 1.65, 0.04]} />
-          <meshStandardMaterial color="#111827" metalness={0.9} roughness={0.2} />
-        </mesh>
-
-        <Instances limit={TUBE_COUNT}>
-          <cylinderGeometry args={[0.055, 0.055, 1.55, 24]} />
-          <meshPhysicalMaterial
-            color="#0284C7"
-            emissive="#1E3A8A"
-            emissiveIntensity={0.4}
-            metalness={0.1}
-            roughness={0.1}
-            transmission={0.65}
-            thickness={0.1}
-          />
-          {Array.from({ length: TUBE_COUNT }, (_, i) => (
-            <Instance key={i} position={[TUBE_START + i * TUBE_SPACING, 0, 0.02]} />
-          ))}
-        </Instances>
-
-        <Instances limit={TUBE_COUNT}>
-          <cylinderGeometry args={[0.028, 0.028, 1.53, 16]} />
-          <meshStandardMaterial color="#1D4ED8" metalness={0.9} roughness={0.1} />
-          {Array.from({ length: TUBE_COUNT }, (_, i) => (
-            <Instance key={i} position={[TUBE_START + i * TUBE_SPACING, 0, 0.02]} />
-          ))}
-        </Instances>
       </group>
     </group>
   );
@@ -134,31 +153,31 @@ function DualTankCustomModel() {
 export default function Canvas3D() {
   return (
     <div className="w-full h-[450px] md:h-[550px] relative cursor-grab active:cursor-grabbing">
-      <Canvas shadows camera={{ position: [0, 1.2, 4.6], fov: 45 }}>
-        <ambientLight intensity={0.9} />
-        <directionalLight position={[5, 8, 5]} intensity={2.5} castShadow shadow-mapSize={1024} />
-        <pointLight position={[-5, 5, -5]} intensity={0.6} color="#F59E0B" />
+      <Canvas shadows camera={{ position: [0, 0.8, 3.8], fov: 45 }}>
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[3, 10, 5]} intensity={2.8} castShadow shadow-mapSize={1024} />
+        <directionalLight position={[-3, -5, -3]} intensity={0.5} color="#FFFFFF" />
 
         <Suspense fallback={null}>
-          <Float speed={1.5} rotationIntensity={0.12} floatIntensity={0.3}>
-            <DualTankCustomModel />
+          <Float speed={1.2} rotationIntensity={0.08} floatIntensity={0.2}>
+            <RealZirveGunisiModel />
           </Float>
-          <ContactShadows position={[0, -1.2, 0]} opacity={0.6} scale={6.5} blur={2.2} far={4} />
+          <ContactShadows position={[0, -1.2, 0]} opacity={0.6} scale={6.5} blur={2} far={4} />
         </Suspense>
 
         <OrbitControls
           enableZoom
-          minDistance={3}
-          maxDistance={6}
+          minDistance={2.5}
+          maxDistance={5.5}
           autoRotate
-          autoRotateSpeed={1.3}
+          autoRotateSpeed={1.0}
           maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-4 py-1.5 rounded-full text-xs text-gray-300 pointer-events-none flex items-center gap-2 border border-solar-500/30">
         <span className="w-2.5 h-2.5 rounded-full bg-solar-500 animate-ping"></span>
-        Reklamlar
+        3D Modeli Çevirerek İnceleyin
       </div>
     </div>
   );
