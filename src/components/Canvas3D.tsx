@@ -29,23 +29,21 @@ function DualTankCustomModel() {
           <meshStandardMaterial color="#D1D5DB" metalness={0.95} roughness={0.1} />
         </mesh>
 
-        {/* Türkçe karakter destekli font (Noto Sans, İ/ı/Ş garanti render) */}
+        {/* 🌟 3D Yazılar (Dahili Hızlı Font) */}
         <Text
           position={[0, 0.08, 0.39]}
           fontSize={0.095}
           color="#000000"
-          font="https://fonts.gstatic.com/s/notosans/v36/o-0mIpQlx3QUlC5A4PNr5TRA.woff"
           anchorX="center"
           anchorY="middle"
         >
-          ANTALYA GÜNIŞI ZİRVE
+          ANTALYA GUNISI ZIRVE
         </Text>
 
         <Text
           position={[0, -0.08, 0.39]}
           fontSize={0.085}
           color="#D97706"
-          font="https://fonts.gstatic.com/s/notosans/v36/o-0mIpQlx3QUlC5A4PNr5TRA.woff"
           anchorX="center"
           anchorY="middle"
         >
@@ -98,7 +96,7 @@ function DualTankCustomModel() {
         </mesh>
       </group>
 
-      {/* 4. VAKUM TÜPLER — artık InstancedMesh, 24 mesh yerine 2 draw call */}
+      {/* 4. VAKUM TÜPLER (InstancedMesh) */}
       <group position={[0, -0.05, 0.32]} rotation={[Math.PI / 4, 0, 0]}>
         <mesh position={[0, 0, -0.04]}>
           <boxGeometry args={[2.15, 1.65, 0.04]} />
@@ -160,7 +158,7 @@ export default function Canvas3D() {
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-4 py-1.5 rounded-full text-xs text-gray-300 pointer-events-none flex items-center gap-2 border border-solar-500/30">
         <span className="w-2.5 h-2.5 rounded-full bg-solar-500 animate-ping"></span>
-        3D Modeli Çevirerek İnceleyin
+        Reklamlar
       </div>
     </div>
   );
