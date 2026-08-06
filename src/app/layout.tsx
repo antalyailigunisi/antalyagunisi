@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// Kendi site domainin veya Cloudflare linkin
 const siteUrl = "https://antalyagunisi.pages.dev";
 
 export const metadata: Metadata = {
@@ -10,6 +9,9 @@ export const metadata: Metadata = {
   description: "Antalya'da yüksek verimli günısı (güneş enerjisi) montajı, tamiri, vakum tüplü ve krom depo sistemleri. Kesintisiz sıcak su ve 0506 252 16 81 hızlı teknik servis.",
   keywords: ["antalya günısı", "antalya güneş enerjisi", "günısı servisi antalya", "günısı tamiri", "günısı fiyatları antalya", "zirve güneş enerjisi"],
   authors: [{ name: "Antalya Günısı Zirve" }],
+  verification: {
+    google: "Y2kOMJW7PxuzubJJ1JbLjfXDLAMew6gWN2Oafsnd6eY",
+  },
   openGraph: {
     title: "Antalya Günısı Zirve | Güneş Enerjisi Sistemleri",
     description: "Antalya genelinde hızlı teknik servis, krom depo, vakum tüp ve kesintisiz sıcak su çözümleri. Hemen arayın: 0506 252 16 81",
@@ -68,6 +70,7 @@ export default function RootLayout({
   return (
     <html lang="tr" className="dark scroll-smooth">
       <head>
+        <meta name="google-site-verification" content="Y2kOMJW7PxuzubJJ1JbLjfXDLAMew6gWN2Oafsnd6eY" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
