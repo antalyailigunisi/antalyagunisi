@@ -12,7 +12,7 @@ function RealZirveGunisiModel() {
   const phone = '0506 252 16 81';
 
   // Fotoğraftaki Gerçek Çatı Eğim Açısı ve Tüp Boyu
-  const tubeAngle = Math.PI / 2.7; // ~66 derece dikey/eğimli duruş
+  const tubeAngle = Math.PI / 1.4; // ~66 derece dikey/eğimli duruş
   const tubeLength = 2.1;          // Tüp uzunluğu
 
   return (
