@@ -1,6 +1,9 @@
-﻿import Canvas3D from '@/components/Canvas3D';
+import Canvas3D from '@/components/Canvas3D';
 import SavingsCalculator from '@/components/SavingsCalculator';
-import { Phone, MapPin, ShieldCheck, Wrench, ThermometerSun, Star, ArrowRight, Zap, Award } from 'lucide-react';
+import SolarWeatherWidget from '@/components/SolarWeatherWidget';
+import PhotoQuoteCTA from '@/components/PhotoQuoteCTA';
+import FAQSection from '@/components/FAQSection';
+import { Phone, MapPin, ShieldCheck, Wrench, ThermometerSun, Star, Award } from 'lucide-react';
 
 export default function Home() {
   const mapUrl = "https://share.google/NIX5zaytsdFQggRCg";
@@ -32,61 +35,70 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 md:pt-40 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-solar-500/30 text-solar-400 text-xs font-semibold">
-            <Award className="w-4 h-4" />
-            <span>Antalya'nın 1 Numaralı Günısı Servisi</span>
-          </div>
+      <section className="pt-28 md:pt-36 px-4 md:px-8 max-w-7xl mx-auto space-y-8">
+        {/* Canlı Antalya Güneş Widget'ı */}
+        <SolarWeatherWidget />
 
-          <h1 className="text-4xl sm:text-6xl font-black text-white leading-tight tracking-tight">
-            Sıcak Suda <br />
-            <span className="text-gradient">Kesintisiz Zirve</span> Teknolojisi
-          </h1>
-
-          <p className="text-gray-400 text-base md:text-lg max-w-xl font-normal leading-relaxed">
-            Basınçlı krom depolu sistemler, yüksek verimli vakum tüpler ve hızlı teknik montaj. Antalya genelinde 7/24 kesintisiz güneş enerjisi çözümleri.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <a
-              href={`tel:${phone.replace(/\s+/g, '')}`}
-              className="flex items-center justify-center gap-3 bg-solar-500 hover:bg-solar-400 text-black font-extrabold text-base px-8 py-4 rounded-2xl shadow-xl shadow-solar-500/20 transition-all duration-300 hover:scale-105"
-            >
-              <Phone className="w-5 h-5 fill-black" />
-              <span>Hemen Servis Çağır</span>
-            </a>
-
-            <a
-              href={mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 glass-panel hover:bg-white/10 text-white font-semibold text-base px-6 py-4 rounded-2xl border border-white/10 transition-all duration-300"
-            >
-              <MapPin className="w-5 h-5 text-solar-400" />
-              <span>Konumu Aç (Google Maps)</span>
-            </a>
-          </div>
-
-          {/* Müşteri Yorum Özeti */}
-          <div className="pt-6 flex items-center gap-4 text-sm text-gray-400">
-            <div className="flex text-solar-400">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-solar-400" />
-              ))}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-solar-500/30 text-solar-400 text-xs font-semibold">
+              <Award className="w-4 h-4" />
+              <span>Antalya'nın 1 Numaralı Günısı Servisi</span>
             </div>
-            <span>%100 Müşteri Memnuniyeti & Garanti</span>
-          </div>
-        </div>
 
-        {/* 3D Model Bölümü */}
-        <div className="lg:col-span-5 glass-panel rounded-3xl border border-white/10 p-2 relative">
-          <Canvas3D />
+            <h1 className="text-4xl sm:text-6xl font-black text-white leading-tight tracking-tight">
+              Sıcak Suda <br />
+              <span className="text-gradient">Kesintisiz Zirve</span> Teknolojisi
+            </h1>
+
+            <p className="text-gray-400 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+              Basınçlı krom depolu sistemler, yüksek verimli vakum tüpler ve hızlı teknik montaj. Antalya genelinde 7/24 kesintisiz güneş enerjisi çözümleri.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <a
+                href={`tel:${phone.replace(/\s+/g, '')}`}
+                className="flex items-center justify-center gap-3 bg-solar-500 hover:bg-solar-400 text-black font-extrabold text-base px-8 py-4 rounded-2xl shadow-xl shadow-solar-500/20 transition-all duration-300 hover:scale-105"
+              >
+                <Phone className="w-5 h-5 fill-black" />
+                <span>Hemen Servis Çağır</span>
+              </a>
+
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 glass-panel hover:bg-white/10 text-white font-semibold text-base px-6 py-4 rounded-2xl border border-white/10 transition-all duration-300"
+              >
+                <MapPin className="w-5 h-5 text-solar-400" />
+                <span>Konumu Aç (Google Maps)</span>
+              </a>
+            </div>
+
+            <div className="pt-4 flex items-center gap-4 text-sm text-gray-400">
+              <div className="flex text-solar-400">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-solar-400" />
+                ))}
+              </div>
+              <span>%100 Müşteri Memnuniyeti & Garanti</span>
+            </div>
+          </div>
+
+          {/* 3D Model Bölümü */}
+          <div className="lg:col-span-5 glass-panel rounded-3xl border border-white/10 p-2 relative">
+            <Canvas3D />
+          </div>
         </div>
       </section>
 
+      {/* Fotoğraflı Teklif Modülü */}
+      <section className="max-w-7xl mx-auto px-4 md:px-8">
+        <PhotoQuoteCTA />
+      </section>
+
       {/* Hesaplayıcı Section */}
-      <section className="mt-20 md:mt-32 px-4 md:px-8 max-w-7xl mx-auto">
+      <section className="mt-12 px-4 md:px-8 max-w-7xl mx-auto">
         <SavingsCalculator />
       </section>
 
@@ -130,7 +142,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sabit Alt İletişim Barı (Mobil Uyumlu Glassmorphism) */}
+      {/* SSS Accordion Bölümü */}
+      <FAQSection />
+
+      {/* Sabit Alt İletişim Barı */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
         <div className="glass-panel p-3 rounded-full border border-solar-500/30 flex items-center justify-between shadow-2xl shadow-black">
           <a
