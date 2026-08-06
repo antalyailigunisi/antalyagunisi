@@ -11,14 +11,14 @@ const TUBE_START = -0.98;
 function RealZirveGunisiModel() {
   const phone = '0506 252 16 81';
 
-  // Fotoğraftaki Gerçek Çatı Eğim Açısı ve Tüp Boyu
-  const tubeAngle = Math.PI / 17.7; // ~66 derece dikey/eğimli duruş
-  const tubeLength = 2.1;          // Tüp uzunluğu
+  // Eksi açı = Tüplerin ekrana / öne doğru uzanmasını sağlar!
+  const tubeAngle = -Math.PI / 2.8; 
+  const tubeLength = 2.1;
 
   return (
-    <group position={[0, -0.35, 0]}>
-      {/* 1. ÜST BEYAZ SOĞUK SU DEPOSU */}
-      <group position={[0, 1.65, -0.2]}>
+    <group position={[0, -0.2, -0.2]}>
+      {/* 1. ÜST BEYAZ SOĞUK SU DEPOSU (EN ARKADA VE ÜSTTE) */}
+      <group position={[0, 1.55, -0.25]}>
         <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.32, 0.32, 2.1, 64]} />
           <meshStandardMaterial color="#FFFFFF" roughness={0.15} metalness={0.1} />
@@ -44,8 +44,8 @@ function RealZirveGunisiModel() {
         </mesh>
       </group>
 
-      {/* 2. ANA MANİFOLD DEPO (TURUNCU KAPAKLI & ZİRVE LOGOLU) */}
-      <group position={[0, 0.95, 0]}>
+      {/* 2. ANA MANİFOLD DEPO (ORTADA, ÖNE BAKAN TABELA & TURUNCU KAPAKLAR) */}
+      <group position={[0, 0.9, 0]}>
         <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.36, 0.36, 2.2, 64]} />
           <meshStandardMaterial color="#FFFFFF" roughness={0.15} metalness={0.05} />
@@ -61,7 +61,7 @@ function RealZirveGunisiModel() {
           <meshStandardMaterial color="#EA580C" roughness={0.3} />
         </mesh>
 
-        {/* BEYAZ TABELA & AMBLEM */}
+        {/* BEYAZ TABELA & AMBLEM (EKRANA / SANA BAKAR) */}
         <mesh position={[0, 0, 0.361]}>
           <planeGeometry args={[1.5, 0.38]} />
           <meshStandardMaterial color="#FFFFFF" roughness={0.1} />
@@ -85,8 +85,8 @@ function RealZirveGunisiModel() {
         </Text>
       </group>
 
-      {/* 3. VAKUM TÜPLER (FOTOĞRAFTAKİ GERÇEK DİK EĞİM) */}
-      <group position={[0, 0.8, 0.1]} rotation={[tubeAngle, 0, 0]}>
+      {/* 3. SIMSIYAH VAKUM TÜPLER (EKRANA / ÖNE DOĞRU SÜZÜLÜR) */}
+      <group position={[0, 0.85, 0.05]} rotation={[tubeAngle, 0, 0]}>
         {Array.from({ length: TUBE_COUNT }, (_, i) => {
           const x = TUBE_START + i * TUBE_SPACING;
           return (
@@ -105,20 +105,20 @@ function RealZirveGunisiModel() {
         })}
       </group>
 
-      {/* 4. ALT TURUNCU TAŞIYICI ÇERÇEVE RAYI */}
-      <mesh position={[0, -0.98, 1.15]}>
+      {/* 4. ALT TURUNCU TAŞIYICI RAY (EN ÖNDE VE AŞAĞIDA) */}
+      <mesh position={[0, -0.9, 1.25]}>
         <boxGeometry args={[2.3, 0.12, 0.1]} />
         <meshStandardMaterial color="#EA580C" roughness={0.3} metalness={0.2} />
       </mesh>
 
-      {/* 5. ARKA SİYAH İSKELET AYAKLARI */}
+      {/* 5. ARKA İSKELET AYAKLARI */}
       <group>
-        <mesh position={[-0.98, 0.35, -0.2]}>
-          <boxGeometry args={[0.05, 2.3, 0.05]} />
+        <mesh position={[-0.98, 0.3, -0.25]}>
+          <boxGeometry args={[0.05, 2.2, 0.05]} />
           <meshStandardMaterial color="#111827" roughness={0.5} />
         </mesh>
-        <mesh position={[0.98, 0.35, -0.2]}>
-          <boxGeometry args={[0.05, 2.3, 0.05]} />
+        <mesh position={[0.98, 0.3, -0.25]}>
+          <boxGeometry args={[0.05, 2.2, 0.05]} />
           <meshStandardMaterial color="#111827" roughness={0.5} />
         </mesh>
       </group>
@@ -129,7 +129,7 @@ function RealZirveGunisiModel() {
 export default function Canvas3D() {
   return (
     <div className="w-full h-[450px] md:h-[550px] relative cursor-grab active:cursor-grabbing">
-      <Canvas shadows camera={{ position: [0, 0.3, 3.7], fov: 42 }}>
+      <Canvas shadows camera={{ position: [0, 0.5, 3.8], fov: 42 }}>
         <ambientLight intensity={1.2} />
         <directionalLight position={[3, 10, 5]} intensity={2.8} castShadow shadow-mapSize={1024} />
         <directionalLight position={[-3, -5, -3]} intensity={0.5} color="#FFFFFF" />
