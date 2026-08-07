@@ -153,7 +153,7 @@ export default function Canvas3D() {
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-4 py-1.5 rounded-full text-xs text-gray-300 pointer-events-none flex items-center gap-2 border border-solar-500/30">
         <span className="w-2.5 h-2.5 rounded-full bg-solar-500 animate-ping"></span>
-        3D Modeli Çevirerek İnceleyin
+        Reklamlar
       </div>
     </div>
   );
